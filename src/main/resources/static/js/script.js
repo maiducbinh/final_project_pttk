@@ -1,17 +1,15 @@
 $(function(){
 
-// User Register validation
+	// User Register validation
 
-	var $userRegister=$("#userRegister");
+	var $userRegister = $("#userRegister");
 
 	$userRegister.validate({
-		
-		rules:{
-			name:{
-				required:true,
-				lettersonly:true
-			}
-			,
+		rules: {
+			name: {
+				required: true,
+				lettersonly: true
+			},
 			email: {
 				required: true,
 				space: true,
@@ -23,118 +21,99 @@ $(function(){
 				numericOnly: true,
 				minlength: 10,
 				maxlength: 12
-
 			},
 			password: {
 				required: true,
 				space: true
-
 			},
 			confirmpassword: {
 				required: true,
 				space: true,
 				equalTo: '#pass'
-
 			},
 			address: {
 				required: true,
 				all: true
-
 			},
-
 			city: {
-				required: true,
-				space: true
-
+				required: true
+				// Removed 'space: true' to allow spaces
 			},
 			state: {
-				required: true,
-
-
+				required: true
+				// Removed 'space: true' to allow spaces
 			},
 			pincode: {
 				required: true,
 				space: true,
 				numericOnly: true
-
-			}, img: {
+			},
+			img: {
 				required: true,
 			}
-			
 		},
-		messages:{
-			name:{
-				required:'name required',
-				lettersonly:'invalid name'
+		messages: {
+			name: {
+				required: 'Name is required',
+				lettersonly: 'Invalid name'
 			},
 			email: {
-				required: 'email name must be required',
-				space: 'space not allowed',
+				required: 'Email is required',
+				space: 'Spaces are not allowed',
 				email: 'Invalid email'
 			},
 			mobileNumber: {
-				required: 'mob no must be required',
-				space: 'space not allowed',
-				numericOnly: 'invalid mob no',
-				minlength: 'min 10 digit',
-				maxlength: 'max 12 digit'
+				required: 'Mobile number is required',
+				space: 'Spaces are not allowed',
+				numericOnly: 'Invalid mobile number',
+				minlength: 'Minimum 10 digits',
+				maxlength: 'Maximum 12 digits'
 			},
-
 			password: {
-				required: 'password must be required',
-				space: 'space not allowed'
-
+				required: 'Password is required',
+				space: 'Spaces are not allowed'
 			},
 			confirmpassword: {
-				required: 'confirm password must be required',
-				space: 'space not allowed',
-				equalTo: 'password mismatch'
-
+				required: 'Confirm password is required',
+				space: 'Spaces are not allowed',
+				equalTo: 'Passwords do not match'
 			},
 			address: {
-				required: 'address must be required',
-				all: 'invalid'
-
+				required: 'Address is required',
+				all: 'Invalid address'
 			},
-
 			city: {
-				required: 'city must be required',
-				space: 'space not allowed'
-
+				required: 'City is required'
+				// Removed 'space' message
 			},
 			state: {
-				required: 'state must be required',
-				space: 'space not allowed'
-
+				required: 'State is required'
+				// Removed 'space' message
 			},
 			pincode: {
-				required: 'pincode must be required',
-				space: 'space not allowed',
-				numericOnly: 'invalid pincode'
-
+				required: 'Pincode is required',
+				space: 'Spaces are not allowed',
+				numericOnly: 'Invalid pincode'
 			},
 			img: {
-				required: 'image required',
+				required: 'Profile image is required',
 			}
 		}
-	})
-	
-	
-// Orders Validation
+	});
 
-var $orders=$("#orders");
+	// Orders Validation
+	var $orders = $("#orders");
 
-$orders.validate({
-		rules:{
-			firstName:{
-				required:true,
-				lettersonly:true
+	$orders.validate({
+		rules: {
+			firstName: {
+				required: true,
+				lettersonly: true
 			},
-			lastName:{
-				required:true,
-				lettersonly:true
-			}
-			,
+			lastName: {
+				required: true,
+				lettersonly: true
+			},
 			email: {
 				required: true,
 				space: true,
@@ -146,141 +125,116 @@ $orders.validate({
 				numericOnly: true,
 				minlength: 10,
 				maxlength: 12
-
 			},
 			address: {
 				required: true,
 				all: true
-
 			},
-
 			city: {
-				required: true,
-				space: true
-
+				required: true
+				// Removed 'space: true' to allow spaces
 			},
 			state: {
-				required: true,
-
-
+				required: true
+				// Removed 'space: true' to allow spaces
 			},
 			pincode: {
 				required: true,
 				space: true,
 				numericOnly: true
-
 			},
-			paymentType:{
-			required: true
+			paymentType: {
+				required: true
 			}
 		},
-		messages:{
-			firstName:{
-				required:'first required',
-				lettersonly:'invalid name'
+		messages: {
+			firstName: {
+				required: 'First name is required',
+				lettersonly: 'Invalid first name'
 			},
-			lastName:{
-				required:'last name required',
-				lettersonly:'invalid name'
+			lastName: {
+				required: 'Last name is required',
+				lettersonly: 'Invalid last name'
 			},
 			email: {
-				required: 'email name must be required',
-				space: 'space not allowed',
+				required: 'Email is required',
+				space: 'Spaces are not allowed',
 				email: 'Invalid email'
 			},
 			mobileNo: {
-				required: 'mob no must be required',
-				space: 'space not allowed',
-				numericOnly: 'invalid mob no',
-				minlength: 'min 10 digit',
-				maxlength: 'max 12 digit'
-			}
-		   ,
-			address: {
-				required: 'address must be required',
-				all: 'invalid'
-
+				required: 'Mobile number is required',
+				space: 'Spaces are not allowed',
+				numericOnly: 'Invalid mobile number',
+				minlength: 'Minimum 10 digits',
+				maxlength: 'Maximum 12 digits'
 			},
-
+			address: {
+				required: 'Address is required',
+				all: 'Invalid address'
+			},
 			city: {
-				required: 'city must be required',
-				space: 'space not allowed'
-
+				required: 'City is required'
+				// Removed 'space' message
 			},
 			state: {
-				required: 'state must be required',
-				space: 'space not allowed'
-
+				required: 'State is required'
+				// Removed 'space' message
 			},
 			pincode: {
-				required: 'pincode must be required',
-				space: 'space not allowed',
-				numericOnly: 'invalid pincode'
-
+				required: 'Pincode is required',
+				space: 'Spaces are not allowed',
+				numericOnly: 'Invalid pincode'
 			},
-			paymentType:{
-			required: 'select payment type'
+			paymentType: {
+				required: 'Please select a payment type'
 			}
-		}	
-})
+		}
+	});
 
-// Reset Password Validation
+	// Reset Password Validation
+	var $resetPassword = $("#resetPassword");
 
-var $resetPassword=$("#resetPassword");
-
-$resetPassword.validate({
-		
-		rules:{
+	$resetPassword.validate({
+		rules: {
 			password: {
 				required: true,
 				space: true
-
 			},
 			confirmPassword: {
 				required: true,
 				space: true,
 				equalTo: '#pass'
-
 			}
 		},
-		messages:{
-		   password: {
-				required: 'password must be required',
-				space: 'space not allowed'
-
+		messages: {
+			password: {
+				required: 'Password is required',
+				space: 'Spaces are not allowed'
 			},
-			confirmpassword: {
-				required: 'confirm password must be required',
-				space: 'space not allowed',
-				equalTo: 'password mismatch'
-
+			confirmPassword: {
+				required: 'Confirm password is required',
+				space: 'Spaces are not allowed',
+				equalTo: 'Passwords do not match'
 			}
-		}	
-})
+		}
+	});
 
+});
 
-
-	
-	
-	
-	
-})
-
-
+// Custom Validator Methods
 
 jQuery.validator.addMethod('lettersonly', function(value, element) {
-		return /^[^-\s][a-zA-Z_\s-]+$/.test(value);
-	});
-	
-		jQuery.validator.addMethod('space', function(value, element) {
-		return /^[^-\s]+$/.test(value);
-	});
+	return /^[a-zA-Z\s_-]+$/.test(value);
+}, 'Letters only please');
 
-	jQuery.validator.addMethod('all', function(value, element) {
-		return /^[^-\s][a-zA-Z0-9_,.\s-]+$/.test(value);
-	});
+jQuery.validator.addMethod('space', function(value, element) {
+	return /^[^\s]+$/.test(value);
+}, 'No spaces allowed');
 
+jQuery.validator.addMethod('all', function(value, element) {
+	return /^[a-zA-Z0-9_,.\s-]+$/.test(value);
+}, 'Invalid characters');
 
-	jQuery.validator.addMethod('numericOnly', function(value, element) {
-		return /^[0-9]+$/.test(value);
-	});
+jQuery.validator.addMethod('numericOnly', function(value, element) {
+	return /^[0-9]+$/.test(value);
+}, 'Numbers only');
