@@ -1,120 +1,201 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Product List</title>
+	<meta charset="UTF-8">
+	<title>Product List</title>
 </head>
 <body>
-	<section>
-		<div class="container-fluid bg-primary p-5 mt-5 ">
+<section>
+	<!-- Search Bar -->
+	<div class="search-container mt-5 mb-4">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
 					<form action="/products" method="get">
 						<div class="input-group">
-							<input type="text" class="form-control" name="ch">
-							<button class="btn btn-light text-dark ms-3 col-md-2">
+							<input type="text" class="form-control" name="ch" placeholder="Search products...">
+							<button class="btn btn-primary ms-2">
 								<i class="fa-solid fa-magnifying-glass"></i> Search
 							</button>
 						</div>
 					</form>
 				</div>
 			</div>
-
 		</div>
+	</div>
 
-
-		<div class="container-fluid mt-1">
-			<div class="row">
-
-				<div class="col-md-2 p-0">
-
-					<div class="card shadow-sm p-0 mb-5 bg-body-tertiary rounded">
-						<div class="card-body">
-							<div class="list-group">
-								<p class="fs-5">Category</p>
-								<a href="/products"
-									th:classappend="${paramValue==''} ? 'active':''"
-									class="list-group-item list-group-item-action"
-									aria-current="true"> All </a> <a th:each="c:${categories}"
-									th:href="@{'/products?category='+${c.name}}"
-									th:classappend="${paramValue == c.name} ? 'active':''"
-									class="list-group-item list-group-item-action">[[${c.name}]]</a>
-							</div>
+	<div class="container">
+		<div class="row">
+			<!-- Category Sidebar -->
+			<div class="col-md-3">
+				<div class="card border-0 shadow-sm">
+					<div class="card-body">
+						<h5 class="fw-bold mb-3">Category</h5>
+						<div class="list-group">
+							<a href="/products"
+							   th:classappend="${paramValue==''} ? 'active':''"
+							   class="list-group-item list-group-item-action">
+								All Products
+							</a>
+							<a th:each="c:${categories}"
+							   th:href="@{'/products?category='+${c.name}}"
+							   th:classappend="${paramValue == c.name} ? 'active':''"
+							   class="list-group-item list-group-item-action">
+								[[${c.name}]]
+							</a>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-10">
-					<div class="card shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-						<div class="card-body">
-							<p class="fs-3 text-center">Products</p>
-							<div class="row">
-
-								<th:block th:if="${productsSize >0}">
-									<div class="col-md-3" th:each="p:${products}">
-										<div class="card">
-											<div class="card-body ">
-												<img alt="" th:src="@{'/img/product_img/'+${p.image}}"
-													width="100%" height="150px">
-												<p class="fs-5 text-center">[[${p.title}]]</p>
-												<div class="row text-center">
-													<p class="fs-6 fw-bold ">
-														<span>&#8377; [[${p.discountPrice}]]</span> <br> <span
-															class="text-decoration-line-through text-secondary">&#8377;
-															[[${p.price}]]</span> <span class="fs-6 text-success">[[${p.discount}]]%
-															off </span>
-													</p>
-													<a th:href="@{'/product/'+${p.id}}"
-														class="btn btn-primary col-md-6 offset-md-3">View
-														Details</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</th:block>
-								<th:block th:unless="${productsSize>0}">
-									<p class="fs-4 text-center mt-4 text-danger">Product not
-										available</p>
-								</th:block>
-							</div>
-
-						</div>
-					</div>
-					<!-- Start Pagination -->
-					<div class="row">
-						<div class="col-md-4">Total Products : [[${totalElements}]]</div>
-						<div class="col-md-6">
-							<th:block th:if="${productsSize>0}">
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item"
-											th:classappend="${isFirst} ? 'disabled':''"><a
-											class="page-link"
-											th:href="@{'/products?pageNo='+${pageNo-1}}"
-											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-										</a></li>
-
-										<li th:each="i:${#numbers.sequence(1,totalPages)}"
-											class="page-item" th:classappend="${pageNo+1==i}?'active':''"
-											]]><a class="page-link"
-											th:href="@{'/products?pageNo='+${i-1}}">[[${i}]]</a></li>
-
-										<li class="page-item"
-											th:classappend="${isLast} ? 'disabled':''"><a
-											class="page-link"
-											th:href="@{'/products?pageNo='+${pageNo+1}}"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a></li>
-									</ul>
-								</nav>
-						</div>
-						</th:block>
-					</div>
-
 				</div>
 			</div>
-		</div>
 
-	</section>
+			<!-- Product Grid -->
+			<div class="col-md-9">
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<h5 class="fw-bold">Products ([[${totalElements}]])</h5>
+				</div>
+
+				<div class="row g-4">
+					<th:block th:if="${productsSize > 0}">
+						<div class="col-md-4" th:each="p:${products}">
+							<div class="card product-card h-100 border-0 shadow-sm">
+								<div class="position-relative">
+									<img th:src="@{'/img/product_img/'+${p.image}}"
+										 class="card-img-top p-3"
+										 style="height: 200px; object-fit: contain;">
+									<div class="discount-badge" th:if="${p.discount > 0}">
+										-[[${p.discount}]]%
+									</div>
+								</div>
+								<div class="card-body">
+									<h6 class="card-title text-truncate mb-3">[[${p.title}]]</h6>
+									<div class="pricing mb-3">
+										<span class="current-price">[[${#numbers.formatDecimal(p.discountPrice, 0, 'COMMA', 0, 'POINT')}]] ₫</span>
+										<span class="original-price" th:if="${p.discount > 0}">
+                                                [[${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')}]] ₫
+										</span>
+									</div>
+									<a th:href="@{'/product/'+${p.id}}" class="btn btn-primary w-100">
+										View Details
+									</a>
+								</div>
+							</div>
+						</div>
+					</th:block>
+
+					<th:block th:unless="${productsSize > 0}">
+						<div class="col-12 text-center py-5">
+							<i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+							<h5 class="text-muted">No products found</h5>
+						</div>
+					</th:block>
+				</div>
+
+				<!-- Pagination -->
+				<nav class="mt-4" th:if="${productsSize > 0}">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" th:classappend="${isFirst} ? 'disabled':''">
+							<a class="page-link" th:href="@{'/products?pageNo='+${pageNo-1}}">
+								<i class="fas fa-chevron-left"></i>
+							</a>
+						</li>
+						<li th:each="i:${#numbers.sequence(1,totalPages)}"
+							class="page-item"
+							th:classappend="${pageNo+1==i}?'active':''">
+							<a class="page-link" th:href="@{'/products?pageNo='+${i-1}}">[[${i}]]</a>
+						</li>
+						<li class="page-item" th:classappend="${isLast} ? 'disabled':''">
+							<a class="page-link" th:href="@{'/products?pageNo='+${pageNo+1}}">
+								<i class="fas fa-chevron-right"></i>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.search-container {
+			background: white;
+			padding: 20px 0;
+		}
+
+		.product-card {
+			transition: transform 0.2s;
+			background: white;
+		}
+
+		.product-card:hover {
+			transform: translateY(-5px);
+		}
+
+		.discount-badge {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			background-color: #f94f2f;
+			color: white;
+			padding: 5px 10px;
+			border-radius: 3px;
+			font-size: 14px;
+		}
+
+		.current-price {
+			font-size: 1.1rem;
+			font-weight: bold;
+			color: #f94f2f;
+		}
+
+		.original-price {
+			font-size: 0.9rem;
+			color: #6c757d;
+			text-decoration: line-through;
+			margin-left: 8px;
+		}
+
+		.list-group-item.active {
+			background-color: #f94f2f;
+			border-color: #f94f2f;
+		}
+
+		.btn-primary {
+			background-color: #f94f2f;
+			border-color: #f94f2f;
+		}
+
+		.btn-primary:hover {
+			background-color: #e63e1f;
+			border-color: #e63e1f;
+		}
+
+		.pagination .page-link {
+			color: #f94f2f;
+		}
+
+		.pagination .active .page-link {
+			background-color: #f94f2f;
+			border-color: #f94f2f;
+			color: white;
+		}
+
+		.card {
+			border-radius: 8px;
+		}
+
+		.list-group-item:first-child {
+			border-top-left-radius: 8px;
+			border-top-right-radius: 8px;
+		}
+
+		.list-group-item:last-child {
+			border-bottom-left-radius: 8px;
+			border-bottom-right-radius: 8px;
+		}
+
+		section {
+			margin-top: 60px;
+		}
+	</style>
+</section>
 </body>
 </html>
