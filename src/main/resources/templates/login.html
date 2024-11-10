@@ -1,63 +1,97 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Login</title>
+	<meta charset="UTF-8">
+	<title>Login</title>
 </head>
 <body>
-	<section>
-
-		<div class="container mt-5 p-5">
-			<div class="row">
-				<div class="col-md-6 p-5">
-					<img alt="" src="img/ecom.png" width="100%" height="400px">
+<section>
+	<div class="container-fluid p-0">
+		<div class="row g-0">
+			<div class="col-md-6 d-none d-md-block">
+				<div class="login-banner h-100 d-flex align-items-center justify-content-center" style="background-color: #fff1ee;">
+					<img src="img/ecom.png" alt="login banner" class="img-fluid" style="max-width: 80%;">
 				</div>
-				<div class="col-md-6 mt-3 p-5">
-					<div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-						<div class="card-header">
-							<p class="fs-4 text-center">Login</p>
-							<div th:if="${param.error}"
-								class="alert alert-danger text-center">
+			</div>
+			<div class="col-md-6 bg-white">
+				<div class="login-form-wrapper p-4 p-md-5">
+					<div class="text-center mb-4">
+						<h2 class="fw-bold" style="color: #f94f2f;">Welcome Back!</h2>
+						<p class="text-muted">Please login to your account</p>
+					</div>
 
-								<th:block
-									th:if="${session.SPRING_SECURITY_LAST_EXCEPTION!=null}">
-									[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
-								</th:block>
+					<div th:if="${param.error}" class="alert alert-danger text-center">
+						<th:block th:if="${session.SPRING_SECURITY_LAST_EXCEPTION!=null}">
+							[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
+						</th:block>
+					</div>
 
+					<div th:if="${param.logout}" class="alert alert-success">
+						Logout Successfully
+					</div>
 
+					<form action="/login" method="post">
+						<div class="mb-4">
+							<label class="form-label">Email address</label>
+							<input required type="email" name="username" class="form-control form-control-lg"
+								   style="border-radius: 10px; border: 1px solid #ced4da;">
+						</div>
 
+						<div class="mb-4">
+							<label class="form-label">Password</label>
+							<input required type="password" name="password" class="form-control form-control-lg"
+								   style="border-radius: 10px; border: 1px solid #ced4da;">
+						</div>
+
+						<div class="d-flex justify-content-between mb-4">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="remember-me">
+								<label class="form-check-label" for="remember-me">
+									Remember me
+								</label>
 							</div>
-
-							<div th:if="${param.logout}" class="alert alert-success">
-								Logout Sucessfully</div>
-						</div>
-						<div class="card-body">
-							<form action="/login" method="post">
-								<div class="mb-3">
-									<label class="form-label">Email</label> <input required
-										class="form-control" name="username" type="email">
-								</div>
-
-								<div class="mb-3">
-									<label class="form-label">Password</label> <input required
-										class="form-control" name="password" type="password">
-								</div>
-								<button type="submit"
-									class="btn bg-primary text-white col-md-12">Login</button>
-							</form>
+							<a href="/forgot-password" class="text-decoration-none" style="color: #f94f2f;">Forgot Password?</a>
 						</div>
 
-						<div class="card-footer text-center">
-							<a href="/forgot-password" class="text-decoration-none">Forgot Password</a><br>
-							Don't have an account ? <a href="#" class="text-decoration-none">Create
-								one </a>
-						</div>
+						<button type="submit" class="btn btn-lg w-100 mb-4"
+								style="background-color: #f94f2f; color: white; border-radius: 10px;">
+							Login
+						</button>
+					</form>
+
+					<div class="text-center">
+						<p class="mb-0">Don't have an account?
+							<a href="/register" class="text-decoration-none" style="color: #f94f2f;">Register</a>
+						</p>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-	</section>
+	<style>
+		.login-form-wrapper {
+			max-width: 500px;
+			margin: 0 auto;
+			margin-top: 70px;
+			margin-bottom: 50px;
+		}
+
+		.form-control:focus {
+			border-color: #f94f2f;
+			box-shadow: 0 0 0 0.25rem rgba(249, 79, 47, 0.25);
+		}
+
+		.btn:hover {
+			opacity: 0.9;
+		}
+
+		@media (max-width: 768px) {
+			.login-form-wrapper {
+				max-width: 100%;
+			}
+		}
+	</style>
+</section>
 </body>
 </html>
