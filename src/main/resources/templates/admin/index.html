@@ -1,100 +1,169 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<title>Admin Dashboard</title>
 </head>
 <body>
-	<section>
-		<div class="container p-5">
-			<p class="text-center fs-3 mt-4">Admin Dashboard</p>
-			<div class="row p-5">
-				<div class="col-md-4 mt-2">
-					<a href="/admin/loadAddProduct" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-square-plus fa-3x"></i>
-								<h4>Add Product</h4>
-							</div>
-						</div>
-					</a>
+<section>
+	<style>
+		.dashboard-card {
+			transition: all 0.3s ease;
+			border: none;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+			background: white;
+			height: 100%;
+		}
+
+		.dashboard-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+		}
+
+		.card-body {
+			padding: 1.5rem;
+		}
+
+		.dashboard-icon {
+			color: #f94f2f;
+			margin-bottom: 1rem;
+		}
+
+		.dashboard-title {
+			color: #2c3e50;
+			font-size: 1.2rem;
+			font-weight: 600;
+			margin: 0;
+		}
+
+		.stats-container {
+			background: linear-gradient(45deg, #f94f2f, #ff6b4a);
+			border-radius: 10px;
+			padding: 1.5rem;
+			color: white;
+			margin-bottom: 2rem;
+		}
+
+		.stats-item {
+			text-align: center;
+			padding: 1rem;
+		}
+
+		.stats-number {
+			font-size: 2rem;
+			font-weight: bold;
+		}
+
+		.stats-label {
+			font-size: 0.9rem;
+			opacity: 0.9;
+		}
+	</style>
+
+	<div class="container py-4">
+		<h2 class="text-center mb-4" style="color: #f94f2f">Admin Dashboard</h2>
+
+		<div class="stats-container mb-4">
+			<div class="row">
+				<div class="col-md-3 stats-item">
+					<div class="stats-number">150</div>
+					<div class="stats-label">Total Products</div>
 				</div>
-
-
-				<div class="col-md-4 mt-2">
-					<a href="/admin/category" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-warning">
-								<i class="fa-solid fa-list fa-3x"></i>
-								<h4>Add Category</h4>
-							</div>
-						</div>
-					</a>
+				<div class="col-md-3 stats-item">
+					<div class="stats-number">45</div>
+					<div class="stats-label">Pending Orders</div>
 				</div>
-
-
-				<div class="col-md-4 mt-2">
-					<a href="/admin/products" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-success">
-								<i class="fa-solid fa-table-list fa-3x"></i>
-								<h4>View Product</h4>
-							</div>
-						</div>
-					</a>
+				<div class="col-md-3 stats-item">
+					<div class="stats-number">1.2k</div>
+					<div class="stats-label">Total Users</div>
 				</div>
-
-
-				<div class="col-md-4 mt-4">
-					<a href="/admin/orders" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-warning">
-								<i class="fa-solid fa-box-open fa-3x"></i>
-								<h4>Orders</h4>
-							</div>
-						</div>
-					</a>
+				<div class="col-md-3 stats-item">
+					<div class="stats-number">$15k</div>
+					<div class="stats-label">Revenue</div>
 				</div>
-
-
-				<div class="col-md-4 mt-4">
-					<a href="/admin/users?type=1" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-circle-user fa-3x"></i>
-								<h4>Users</h4>
-							</div>
-						</div>
-					</a>
-				</div>
-
-
-				<div class="col-md-4 mt-4">
-					<a href="/admin/add-admin" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-user-plus fa-3x"></i>
-								<h4>Add Admin</h4>
-							</div>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-md-4 mt-4">
-					<a href="/admin/users?type=2" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-circle-user fa-3x"></i>
-								<h4>Admin</h4>
-							</div>
-						</div>
-					</a>
-				</div>
-
-
 			</div>
 		</div>
-	</section>
+
+		<div class="row g-4">
+			<div class="col-md-3">
+				<a href="/admin/loadAddProduct" class="text-decoration-none">
+					<div class="dashboard-card">
+						<div class="card-body text-center">
+							<i class="fa-solid fa-square-plus fa-2x dashboard-icon"></i>
+							<h4 class="dashboard-title">Add Product</h4>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="/admin/category" class="text-decoration-none">
+					<div class="dashboard-card">
+						<div class="card-body text-center">
+							<i class="fa-solid fa-list fa-2x dashboard-icon"></i>
+							<h4 class="dashboard-title">Add Category</h4>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="/admin/products" class="text-decoration-none">
+					<div class="dashboard-card">
+						<div class="card-body text-center">
+							<i class="fa-solid fa-table-list fa-2x dashboard-icon"></i>
+							<h4 class="dashboard-title">View Product</h4>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="/admin/orders" class="text-decoration-none">
+					<div class="dashboard-card">
+						<div class="card-body text-center">
+							<i class="fa-solid fa-box-open fa-2x dashboard-icon"></i>
+							<h4 class="dashboard-title">Orders</h4>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="/admin/users?type=1" class="text-decoration-none">
+					<div class="dashboard-card">
+						<div class="card-body text-center">
+							<i class="fa-solid fa-circle-user fa-2x dashboard-icon"></i>
+							<h4 class="dashboard-title">Users</h4>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="/admin/add-admin" class="text-decoration-none">
+					<div class="dashboard-card">
+						<div class="card-body text-center">
+							<i class="fa-solid fa-user-plus fa-2x dashboard-icon"></i>
+							<h4 class="dashboard-title">Add Admin</h4>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="/admin/users?type=2" class="text-decoration-none">
+					<div class="dashboard-card">
+						<div class="card-body text-center">
+							<i class="fa-solid fa-circle-user fa-2x dashboard-icon"></i>
+							<h4 class="dashboard-title">Admin</h4>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
 </body>
 </html>
