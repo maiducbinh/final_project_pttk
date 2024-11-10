@@ -1,0 +1,53 @@
+[33mcommit 099c3ae7d676e01d536f951e2d9d7e12c016f1b8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 20:55:00 2024 +0700
+
+    update navbar
+
+[33mcommit d525742f6d719a6fa4fb2a5de8e9b5daf8b150e4[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 20:30:43 2024 +0700
+
+    update forgot password
+
+[33mcommit 4f4d247be1f47b353ce231e6ff421dbc5f32ff68[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 20:25:40 2024 +0700
+
+    update register
+
+[33mcommit f24de66460553e40d28857c9170c312ff5de7e78[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 17:33:03 2024 +0700
+
+    update login
+
+[33mcommit 77fe957d4da7b773f35798693e8c13993c9e54e8[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 16:10:04 2024 +0700
+
+    update admin dashboard
+
+[33mcommit c22cdb0d8be1a735b7874228c8db017e6d7a5363[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 16:05:01 2024 +0700
+
+    update client ui
+
+[33mcommit 3eafe8d16a9fcf0df5b3793f8f59a3cb016dcc0c[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 15:18:07 2024 +0700
+
+    update index, product
+
+[33mcommit 04108c99d845ae1a2023d2b2401580e6ace88dcf[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 12:04:44 2024 +0700
+
+    update navbar and footer
+
+[33mcommit 946d1c21d23bc53758dc952de047255780ae1758[m
+Author: maiducbinh <binhmai2205@gmail.com>
+Date:   Sun Nov 10 11:31:12 2024 +0700
+
+    first commit
