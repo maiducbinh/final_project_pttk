@@ -1,60 +1,152 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+	  th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
 </head>
 <body>
-	<section>
-		<div class="container mt-5 p-5">
-			<div class="row">
-				<p class="text-center fs-3">My Orders</p>
-				<th:block th:if="${session.succMsg}">
-					<p class="text-success fw-bold text-center">[[${session.succMsg}]]</p>
-					<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-				</th:block>
+<section>
+	<style>
+		.order-container {
+			background: #fff;
+			border-radius: 8px;
+			box-shadow: 0 0 15px rgba(0,0,0,0.1);
+			padding: 2rem;
+		}
 
-				<th:block th:if="${session.errorMsg}">
-					<p class="text-danger fw-bold text-center">[[${session.errorMsg}]]</p>
-					<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-				</th:block>
-				<div class="col-md-12 ">
+		.order-title {
+			color: #f94f2f;
+			font-weight: 600;
+			margin-bottom: 2rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
 
-					<table class="table table-bordered card-sh">
-						<thead >
-							<tr >
-								<th scope="col">Order Id</th>
-								<th scope="col">Date</th>
-								<th scope="col">Product Details</th>
-								<th scope="col">Price</th>
-								<th scope="col">Status</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="o:${orders}">
-								<th scope="row">[[${o.orderId}]]</th>
-								<td>[[${o.orderDate}]]</td>
-								<td>[[${o.product.title}]]</td>
-								<td>Quantity : [[${o.quantity}]] <br>Price :
-									[[${o.price}]] <br>Total Price :[[${o.quantity *
-									o.price}]]
-								</td>
-								<td>[[${o.status}]]</td>
-								<td><th:block th:if="${o.status!='Cancelled'}">
-										<a th:href="@{'/user/update-status?id='+${o.id}+'&st=6' }"
-											class="btn btn-sm btn-danger">Cancel</a>
-									</th:block> <th:block th:unless="${o.status!='Cancelled'}">
-										<a href="#" class="btn btn-sm btn-danger disabled" >Cancel</a>
-									</th:block></td>
-							</tr>
-						</tbody>
-					</table>
+		.order-table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 10px;
+		}
+
+		.order-table thead th {
+			background: #f94f2f;
+			color: white;
+			padding: 15px;
+			font-weight: 500;
+			text-transform: uppercase;
+			font-size: 0.9rem;
+		}
+
+		.order-table tbody tr {
+			background: #fff;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+			transition: transform 0.2s;
+		}
+
+		.order-table tbody tr:hover {
+			transform: translateY(-2px);
+		}
+
+		.order-table td, .order-table th {
+			padding: 15px;
+			vertical-align: middle;
+		}
+
+		.price-info {
+			line-height: 1.8;
+		}
+
+		.btn-cancel {
+			background: #f94f2f;
+			border: none;
+			color: white;
+			padding: 8px 16px;
+			border-radius: 4px;
+			transition: all 0.3s;
+		}
+
+		.btn-cancel:hover {
+			background: #e63e1e;
+			color: white;
+		}
+
+		.btn-cancel.disabled {
+			background: #ffd1c6;
+			cursor: not-allowed;
+		}
+
+		.alert {
+			padding: 15px;
+			border-radius: 4px;
+			margin-bottom: 20px;
+		}
+
+		.alert-success {
+			background: #d4edda;
+			color: #155724;
+		}
+
+		.alert-danger {
+			background: #f8d7da;
+			color: #721c24;
+		}
+	</style>
+
+	<div class="container mt-5">
+		<div class="order-container">
+			<h2 class="order-title text-center">My Orders</h2>
+
+			<th:block th:if="${session.succMsg}">
+				<div class="alert alert-success text-center">
+					[[${session.succMsg}]]
 				</div>
-			</div>
+				<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+			</th:block>
 
+			<th:block th:if="${session.errorMsg}">
+				<div class="alert alert-danger text-center">
+					[[${session.errorMsg}]]
+				</div>
+				<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+			</th:block>
+
+			<table class="order-table">
+				<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Date</th>
+					<th>Product Details</th>
+					<th>Price Information</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="o:${orders}">
+					<td>[[${o.orderId}]]</td>
+					<td>[[${o.orderDate}]]</td>
+					<td>[[${o.product.title}]]</td>
+					<td class="price-info">
+						Quantity: [[${o.quantity}]] <br>
+						Price: [[${#numbers.formatDecimal(o.price, 0, 'COMMA', 0, 'POINT')}]] ?<br>
+						Total Price: [[${#numbers.formatDecimal(o.quantity * o.price, 0, 'COMMA', 0, 'POINT')}]] ?
+					</td>
+					<td>[[${o.status}]]</td>
+					<td>
+						<th:block th:if="${o.status!='Cancelled'}">
+							<a th:href="@{'/user/update-status?id='+${o.id}+'&st=6'}"
+							   class="btn btn-cancel">Cancel</a>
+						</th:block>
+						<th:block th:unless="${o.status!='Cancelled'}">
+							<a href="#" class="btn btn-cancel disabled">Cancel</a>
+						</th:block>
+					</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
-	</section>
+	</div>
+</section>
 </body>
 </html>
