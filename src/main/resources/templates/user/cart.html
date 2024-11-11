@@ -142,7 +142,7 @@
 									 alt="Product Image">
 							</td>
 							<td>[[${cart.product.title}]]</td>
-							<td>$[[${#numbers.formatDecimal(cart.product.discountPrice, 0, 'COMMA', 2, 'POINT')}]]</td>
+							<td>₫[[${#numbers.formatDecimal(cart.product.discountPrice, 0, 'COMMA', 0, 'POINT')}]]</td>
 							<td class="text-center">
 								<div class="quantity-control">
 									<a class="quantity-btn" th:href="@{'/user/cartQuantityUpdate?sy=de&cid='+${cart.id}}">
@@ -154,12 +154,12 @@
 									</a>
 								</div>
 							</td>
-							<td>$[[${#numbers.formatDecimal(cart.totalPrice, 0, 'COMMA', 2, 'POINT')}]]</td>
+							<td>₫[[${#numbers.formatDecimal(cart.totalPrice, 0, 'COMMA', 0, 'POINT')}]]</td>
 						</tr>
 						<tr>
 							<td colspan="4"></td>
 							<td class="fw-bold">Total Price:</td>
-							<td class="fw-bold">$[[${#numbers.formatDecimal(totalOrderPrice, 0, 'COMMA', 2, 'POINT')}]]</td>
+							<td class="fw-bold">₫[[${#numbers.formatDecimal(totalOrderPrice, 0, 'COMMA', 0, 'POINT')}]]</td>
 						</tr>
 						</tbody>
 					</table>
