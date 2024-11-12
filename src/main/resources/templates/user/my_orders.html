@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	  th:replace="~{base::layout(~{::section})}">
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
 <body>
@@ -129,8 +129,8 @@
 					<td>[[${o.product.title}]]</td>
 					<td class="price-info">
 						Quantity: [[${o.quantity}]] <br>
-						Price: [[${#numbers.formatDecimal(o.price, 0, 'COMMA', 0, 'POINT')}]] ?<br>
-						Total Price: [[${#numbers.formatDecimal(o.quantity * o.price, 0, 'COMMA', 0, 'POINT')}]] ?
+						Price: [[${#numbers.formatDecimal(o.price, 0, 'COMMA', 0, 'POINT')}]] đ<br>
+						Total Price: [[${#numbers.formatDecimal(o.quantity * o.price, 0, 'COMMA', 0, 'POINT')}]] đ
 					</td>
 					<td>[[${o.status}]]</td>
 					<td>
