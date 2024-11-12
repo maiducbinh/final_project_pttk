@@ -130,13 +130,11 @@
 					</li>
 
 					<!-- Chat menu -->
-					<th:block th:if="${user != null}">
-						<li class="nav-item" th:if="${user.role == 'ROLE_USER'}">
-							<a class="nav-link active" aria-current="page" href="/user/chat">
-								<i class="fa-solid fa-comments"></i> Chat
-							</a>
-						</li>
-					</th:block>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/user/chat">
+							<i class="fa-solid fa-comments"></i> Chat
+						</a>
+					</li>
 				</ul>
 
 				<!-- Right side menu -->
